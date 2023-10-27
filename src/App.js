@@ -14,7 +14,6 @@ function App() {
       const response = await fetch(URL);
       if (response.ok) {
         const data = await response.json();
-        console.log(data);
         return data;
       } else {
         throw new Error("Problema nella fetch!");
