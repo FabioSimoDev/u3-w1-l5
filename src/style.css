@@ -1,0 +1,73 @@
+/* NAVBAR */
+
+.mynav {
+  background-color: #221f1f !important;
+}
+
+.mynav .icons {
+  margin-left: 0.8em;
+  margin-right: 0.8em;
+  font-size: 1.2em;
+  color: #f5f5f1;
+}
+
+.navbar-nav {
+  font-size: 90%;
+}
+
+#kids {
+  color: #f5f5f1;
+  font-size: 0.8em;
+}
+
+/* BODY */
+body {
+  background-color: #221f1f;
+}
+
+/* GENERALI */
+h2,
+h4,
+footer {
+  color: #f5f5f1 !important;
+}
+
+/* MAIN */
+.genres-dropdown {
+  background-color: #221f1f !important;
+}
+
+/* CAROUSEL */
+/* nascondo un pò di cose date dal componente Carousel di react-bootstrap.
+in alternativa avrei potuto usare del classivo html con classi di bootstrap,
+ma per esercitarmi ho voluto usare più componenti possibile. */
+
+.carousel-inner {
+  display: flex !important;
+  padding-right: 3rem;
+}
+
+a.carousel-control-prev,
+a.carousel-control-next {
+  display: none !important;
+}
+
+.carousel-indicators {
+  display: none !important;
+}
+
+@media (min-width: 1200px) {
+  .carousel-item {
+    flex: 0 0 16.66666666666667%;
+  }
+  .carousel-control-prev,
+  .carousel-control-next {
+    width: 6vh;
+    height: 6vh;
+  }
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  background-color: color-mix(in srgb, white 10%, transparent 90%);
+}
