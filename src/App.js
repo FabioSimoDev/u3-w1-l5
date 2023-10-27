@@ -8,8 +8,7 @@ import Footer from "./Footer";
 function App() {
   const getData = async function (query) {
     const APIKEY = "9b8cbbea";
-    const QUERY = "harry potter";
-    console.error(QUERY);
+    const QUERY = query;
     const URL = `http://www.omdbapi.com/?apikey=${APIKEY}&s=${QUERY}`;
     try {
       const response = await fetch(URL);

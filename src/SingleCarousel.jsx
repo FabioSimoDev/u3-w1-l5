@@ -1,44 +1,39 @@
 import Col from "react-bootstrap/Col";
 import Carousel from "react-bootstrap/Carousel";
 import Card from "react-bootstrap/Card";
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 const SingleCarousel = function ({ startImg, title, query, getData }) {
-  console.warn(query);
-  getData(query);
-  const imgCount = 18;
-  let imgIndex = 1;
-  imgIndex = startImg;
+  const [filmDataState, setFilmDataState] = useState({ Search: [] });
+  const [mouseHover, setMouseHover] = useState("");
 
-  const getImage = function () {
-    if (imgIndex > 0 && imgIndex <= imgCount) {
-      let imgToUse = imgIndex;
-      if (imgIndex === imgCount) {
-        imgIndex = 1;
-        imgToUse = imgIndex;
-        imgIndex++;
-        return imgToUse;
-      } else {
-        if (imgIndex === 1) {
-          imgIndex++;
-        } else {
-          imgToUse = imgIndex;
-          imgIndex++;
-        }
-        // imgToUse = imgIndex;
-      }
-      console.log(imgIndex);
-      return imgToUse;
+  const handleMouseDown = function (index) {
+    if (mouseHover === index) {
+      //se è già uguale, deseleziona la card
+      setMouseHover("");
+    } else {
+      setMouseHover(index);
     }
-    console.log(imgIndex);
-    return 1;
+  };
+
+  const aspectRatio = 1.3;
+
+  function resizeImage(img = undefined) {
+    if (img) {
+      const calculatedHeight = aspectRatio * img.clientWidth;
+      img.style.height = `${calculatedHeight}px`;
+    }
+  }
+
+  const getFilms = async function () {
+    const data = await getData(query);
+    setFilmDataState(data);
   };
 
   const carouselRef = useRef(null);
 
   const handleNext = () => {
     if (carouselRef.current) {
-      console.log(carouselRef);
       const carouselInstance = carouselRef.current;
       const carouselInner = carouselInstance.querySelector(".carousel-inner");
 
@@ -66,7 +61,6 @@ const SingleCarousel = function ({ startImg, title, query, getData }) {
 
   const handlePrev = () => {
     if (carouselRef.current) {
-      console.log(carouselRef);
       const carouselInstance = carouselRef.current;
       const carouselInner = carouselInstance.querySelector(".carousel-inner");
 
@@ -83,6 +77,11 @@ const SingleCarousel = function ({ startImg, title, query, getData }) {
     }
   };
 
+  //al caricamento del componente a funzione.
+  useEffect(() => {
+    getFilms();
+  }, []);
+
   return (
     <Col xs={12} className="col-12 p-0 mb-lg-5 mb-3">
       <h2 className="h4 fw-semibold p-0 mb-3">{title}</h2>
@@ -94,105 +93,32 @@ const SingleCarousel = function ({ startImg, title, query, getData }) {
         wrap={false}
       >
         <div className="carousel-inner d-flex pe-5">
-          <Carousel.Item className="d-block me-0 active">
-            <Card className="rounded-0 m-1 border-0 shadow-sm">
-              <img
-                src={require(`./mockup/assets/${getImage()}.png`)}
-                className="d-block w-100"
-                alt="Netflix-assets/Netflix-assets/assets/media/media0.webp"
-              />
-            </Card>
-          </Carousel.Item>
-          <Carousel.Item className="carousel-item d-block me-0">
-            <Card className="rounded-0 m-1 border-0 shadow-sm">
-              <img
-                src={require(`./mockup/assets/${getImage()}.png`)}
-                className="d-block w-100"
-                alt="Netflix-assets/Netflix-assets/assets/media/media0.webp"
-              />
-            </Card>
-          </Carousel.Item>
-          <Carousel.Item className="carousel-item d-block me-0">
-            <Card className="rounded-0 m-1 border-0 shadow-sm">
-              <img
-                src={require(`./mockup/assets/${getImage()}.png`)}
-                className="d-block w-100"
-                alt="Netflix-assets/Netflix-assets/assets/media/media0.webp"
-              />
-            </Card>
-          </Carousel.Item>
-          <Carousel.Item className="carousel-item d-block me-0">
-            <Card className="rounded-0 m-1 border-0 shadow-sm">
-              <img
-                src={require(`./mockup/assets/${getImage()}.png`)}
-                className="d-block w-100"
-                alt="Netflix-assets/Netflix-assets/assets/media/media0.webp"
-              />
-            </Card>
-          </Carousel.Item>
-          <Carousel.Item className="carousel-item d-block me-0">
-            <Card className="rounded-0 m-1 border-0 shadow-sm">
-              <img
-                src={require(`./mockup/assets/${getImage()}.png`)}
-                className="d-block w-100"
-                alt="Netflix-assets/Netflix-assets/assets/media/media0.webp"
-              />
-            </Card>
-          </Carousel.Item>
-          <Carousel.Item className="carousel-item d-block me-0">
-            <Card className="rounded-0 m-1 border-0 shadow-sm">
-              <img
-                src={require(`./mockup/assets/${getImage()}.png`)}
-                className="d-block w-100"
-                alt="Netflix-assets/Netflix-assets/assets/media/media0.webp"
-              />
-            </Card>
-          </Carousel.Item>
-          <Carousel.Item className="carousel-item d-block me-0">
-            <Card className="rounded-0 m-1 border-0 shadow-sm">
-              <img
-                src={require(`./mockup/assets/${getImage()}.png`)}
-                className="d-block w-100"
-                alt="Netflix-assets/Netflix-assets/assets/media/media0.webp"
-              />
-            </Card>
-          </Carousel.Item>
-          <Carousel.Item className="carousel-item d-block me-0">
-            <Card className="rounded-0 m-1 border-0 shadow-sm">
-              <img
-                src={require(`./mockup/assets/${getImage()}.png`)}
-                className="d-block w-100"
-                alt="Netflix-assets/Netflix-assets/assets/media/media0.webp"
-              />
-            </Card>
-          </Carousel.Item>
-          <Carousel.Item className="carousel-item d-block me-0">
-            <Card className="rounded-0 m-1 border-0 shadow-sm">
-              <img
-                src={require(`./mockup/assets/${getImage()}.png`)}
-                className="d-block w-100"
-                alt="Netflix-assets/Netflix-assets/assets/media/media0.webp"
-              />
-            </Card>
-          </Carousel.Item>
-          <Carousel.Item className="carousel-item d-block me-0">
-            <Card className="rounded-0 m-1 border-0 shadow-sm">
-              <img
-                src={require(`./mockup/assets/${getImage()}.png`)}
-                className="d-block w-100"
-                alt="Netflix-assets/Netflix-assets/assets/media/media0.webp"
-              />
-            </Card>
-          </Carousel.Item>
-          <Carousel.Item className="carousel-item d-block me-0">
-            <Card className="rounded-0 m-1 border-0 shadow-sm">
-              <img
-                src={require(`./mockup/assets/${getImage()}.png`)}
-                className="d-block w-100"
-                alt="Netflix-assets/Netflix-assets/assets/media/media0.webp"
-              />
-            </Card>
-          </Carousel.Item>
+          {filmDataState.Search.length > 0 &&
+            filmDataState.Search.map((film, index) => (
+              <Carousel.Item className="d-block me-0" key={film.imdbID}>
+                {mouseHover === index && (
+                  <p className="text-white start-50 w-100 text-center translate-middle-x px-1 position-absolute">
+                    <small className="fw-semibold">{film.Title}</small>
+                  </p>
+                )}
+                <Card
+                  className={
+                    mouseHover === index
+                      ? "rounded-0 m-1 border-0 shadow-sm slide-down"
+                      : "rounded-0 m-1 border-0 shadow-sm"
+                  }
+                  onMouseDown={() => handleMouseDown(index)}
+                  id={index}
+                >
+                  <img
+                    src={film.Poster}
+                    onLoad={(e) => resizeImage(e.target)}
+                    className="d-block w-100"
+                    alt="Netflix-assets/Netflix-assets/assets/media/media0.webp"
+                  />
+                </Card>
+              </Carousel.Item>
+            ))}
         </div>
         <button
           className="carousel-control-prev top-50 rounded-circle translate-middle-y"

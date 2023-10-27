@@ -5,7 +5,7 @@ import Button from "react-bootstrap/Button";
 
 const Footer = function () {
   return (
-    <Container className="w-50 mx-auto pt-5">
+    <Container className="w-50 mx-auto pt-5 footer">
       <Row className="px-1">
         <div className="social d-flex gap-3">
           <svg

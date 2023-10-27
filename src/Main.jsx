@@ -29,22 +29,19 @@ const Main = function ({ getData }) {
         </div>
         <Row className="ms-lg-5 ms=md=3 ms-2">
           <SingleCarousel
-            startImg={1}
             title="Trending Now"
             getData={getData}
             query="harry potter"
           />
           <SingleCarousel
-            startImg={7}
             title="Watch it Again"
             getData={getData}
-            query="harry%20potter"
+            query="lord of the rings"
           />
           <SingleCarousel
-            startImg={14}
             title="New Releases"
             getData={getData}
-            query="harry%20potter"
+            query="marvel"
           />
         </Row>
       </Container>
