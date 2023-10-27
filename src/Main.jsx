@@ -3,7 +3,7 @@ import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Dropdown from "react-bootstrap/Dropdown";
 import Row from "react-bootstrap/Row";
 import SingleCarousel from "./SingleCarousel";
-const Main = function ({ getData }) {
+const Main = function ({ getData, setLoadingState }) {
   return (
     <>
       <Container fluid className="px-4">
@@ -41,6 +41,7 @@ const Main = function ({ getData }) {
           <SingleCarousel
             title="New Releases"
             getData={getData}
+            setLoadingState={setLoadingState}
             query="marvel"
           />
         </Row>

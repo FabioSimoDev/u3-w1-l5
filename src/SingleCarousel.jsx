@@ -3,7 +3,7 @@ import Carousel from "react-bootstrap/Carousel";
 import Card from "react-bootstrap/Card";
 import React, { useEffect, useRef, useState } from "react";
 
-const SingleCarousel = function ({ startImg, title, query, getData }) {
+const SingleCarousel = function ({ title, query, getData, setLoadingState }) {
   const [filmDataState, setFilmDataState] = useState({ Search: [] });
   const [mouseHover, setMouseHover] = useState("");
 
@@ -27,7 +27,12 @@ const SingleCarousel = function ({ startImg, title, query, getData }) {
 
   const getFilms = async function () {
     const data = await getData(query);
-    setFilmDataState(data);
+    if (data) {
+      setFilmDataState(data);
+      if (setLoadingState) {
+        setLoadingState(false);
+      }
+    }
   };
 
   const carouselRef = useRef(null);

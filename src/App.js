@@ -4,8 +4,14 @@ import MyNav from "./MyNav";
 import "./style.css";
 import Main from "./Main";
 import Footer from "./Footer";
+import React, { useState } from "react";
+import SpinnerOverlay from "./SpinnerOverlay";
+import ErrorOverlay from "./ErrorOverlay";
 
 function App() {
+  const [isLoading, setLoadingState] = useState(true);
+  const [errors, setError] = useState("");
+
   const getData = async function (query) {
     const APIKEY = "9b8cbbea";
     const QUERY = query;
@@ -19,13 +25,20 @@ function App() {
         throw new Error("Problema nella fetch!");
       }
     } catch (error) {
-      console.error(error);
+      setError(error.message);
     }
   };
+
   return (
     <div>
+      {!errors ? (
+        <SpinnerOverlay isLoading={isLoading} />
+      ) : (
+        <ErrorOverlay error={errors} />
+      )}
+
       <MyNav />
-      <Main getData={getData} />
+      <Main getData={getData} setLoadingState={setLoadingState} />
       <Footer />
     </div>
   );
