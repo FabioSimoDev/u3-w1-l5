@@ -4,6 +4,7 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import logo from "./mockup/assets/logo.png";
 import { Search, Bell, PersonCircle } from "react-bootstrap-icons";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const MyNav = function () {
   return (
@@ -16,12 +17,12 @@ const MyNav = function () {
           <Navbar.Toggle aria-controls="navbarSupportedContent"></Navbar.Toggle>
           <Navbar.Collapse id="navbarSupportedContent">
             <Nav className="me-auto mb-2 mb-lg-0">
-              <Nav.Link href="#" className="fw-bold" active>
+              <Link to="/" className="nav-link fw-bold active">
                 Home
-              </Nav.Link>
-              <Nav.Link href="#" className="fw-bold">
+              </Link>
+              <Link to="/tv-shows" className="nav-link fw-bold">
                 TV Shows
-              </Nav.Link>
+              </Link>
               <Nav.Link href="#" className="fw-bold">
                 Movies
               </Nav.Link>

@@ -2,6 +2,7 @@ import Col from "react-bootstrap/Col";
 import Carousel from "react-bootstrap/Carousel";
 import Card from "react-bootstrap/Card";
 import React, { useEffect, useRef, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const SingleCarousel = function ({ title, query, getData, setLoadingState }) {
   const [filmDataState, setFilmDataState] = useState({ Search: [] });
@@ -103,9 +104,15 @@ const SingleCarousel = function ({ title, query, getData, setLoadingState }) {
               <Carousel.Item className="d-block me-0" key={film.imdbID}>
                 {mouseHover === index && (
                   <p className="text-white start-50 w-100 text-center translate-middle-x px-1 position-absolute">
-                    <small className="fw-semibold">{film.Title}</small>
+                    <Link
+                      to={"/movie-details/" + film.imdbID}
+                      className="text-white"
+                    >
+                      <small className="fw-semibold">{film.Title}</small>
+                    </Link>
                   </p>
                 )}
+
                 <Card
                   className={
                     mouseHover === index
@@ -119,7 +126,7 @@ const SingleCarousel = function ({ title, query, getData, setLoadingState }) {
                     src={film.Poster}
                     onLoad={(e) => resizeImage(e.target)}
                     className="d-block w-100"
-                    alt="Netflix-assets/Netflix-assets/assets/media/media0.webp"
+                    alt={film.title}
                   />
                 </Card>
               </Carousel.Item>

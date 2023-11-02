@@ -7,6 +7,9 @@ import Footer from "./Footer";
 import React, { useState } from "react";
 import SpinnerOverlay from "./SpinnerOverlay";
 import ErrorOverlay from "./ErrorOverlay";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import TvShows from "./TvShows";
+import MovieDetails from "./MovieDetails";
 
 function App() {
   const [isLoading, setLoadingState] = useState(true);
@@ -30,17 +33,36 @@ function App() {
   };
 
   return (
-    <div>
-      {!errors ? (
-        <SpinnerOverlay isLoading={isLoading} />
-      ) : (
-        <ErrorOverlay error={errors} />
-      )}
+    <BrowserRouter>
+      <div>
+        {!errors ? (
+          <SpinnerOverlay isLoading={isLoading} />
+        ) : (
+          <ErrorOverlay error={errors} />
+        )}
+        <MyNav />
+        <Routes>
+          <Route element={<TvShows />} path="/tv-shows" />
+          <Route
+            element={
+              <Main getData={getData} setLoadingState={setLoadingState} />
+            }
+            path="/"
+          />
+          <Route
+            element={
+              <MovieDetails
+                setLoadingState={setLoadingState}
+                setError={setError}
+              />
+            }
+            path="/movie-details/:movieId"
+          />
+        </Routes>
 
-      <MyNav />
-      <Main getData={getData} setLoadingState={setLoadingState} />
-      <Footer />
-    </div>
+        <Footer />
+      </div>
+    </BrowserRouter>
   );
 }
 
