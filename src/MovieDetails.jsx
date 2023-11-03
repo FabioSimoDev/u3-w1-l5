@@ -1,11 +1,14 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Card, Col, Row, Container } from "react-bootstrap";
+import { getComment } from "./commentScript";
+import CommentArea from "./CommentArea";
 
 const MovieDetails = function ({ setLoadingState, setError }) {
   const params = useParams();
 
   const [movieDetails, setMovieDetails] = useState(undefined);
+  const [comments, setComments] = useState(undefined);
   const getMovieDetails = async function () {
     setLoadingState(true);
     const APIKEY = "9b8cbbea";
@@ -26,15 +29,21 @@ const MovieDetails = function ({ setLoadingState, setError }) {
     }
   };
 
+  const getComments = async function () {
+    setComments(await getComment(params.movieId));
+  };
+
   useEffect(() => {
     getMovieDetails();
+    getComments();
   }, []);
+
   return (
     <Container>
       {movieDetails && (
         <Row className="justify-content-center">
-          <Col lg={8}>
-            <Card bg="dark" text="white" className="flex-row">
+          <Col xxl={8}>
+            <Card bg="dark" text="white" className="flex-xxl-row">
               <Col lg={5}>
                 <Card.Img
                   variant="top"
@@ -74,6 +83,13 @@ const MovieDetails = function ({ setLoadingState, setError }) {
             </Card>
           </Col>
         </Row>
+      )}
+      {comments && (
+        <CommentArea
+          movieComments={comments}
+          movieId={params.movieId}
+          setComments={setComments}
+        />
       )}
     </Container>
   );

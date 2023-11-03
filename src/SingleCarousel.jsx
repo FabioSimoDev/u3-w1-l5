@@ -95,8 +95,8 @@ const SingleCarousel = function ({ title, query, getData, setLoadingState }) {
         id="carouselControls"
         className="carousel p-0"
         ref={carouselRef}
-        interval={false}
-        wrap={false}
+        interval="false"
+        // wrap={false}
       >
         <div className="carousel-inner d-flex pe-5">
           {filmDataState.Search.length > 0 &&

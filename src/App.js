@@ -16,6 +16,7 @@ function App() {
   const [errors, setError] = useState("");
 
   const getData = async function (query) {
+    setLoadingState(true);
     const APIKEY = "9b8cbbea";
     const QUERY = query;
     const URL = `http://www.omdbapi.com/?apikey=${APIKEY}&s=${QUERY}`;
